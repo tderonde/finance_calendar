@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Crypto Crustaceans Project 2</title>
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <link href="./static/styles.css" rel="stylesheet" />
+        <link href="./static/d3styles.css" rel="stylesheet" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    </head>
+    <body id="page-top">
+	    
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+			<li class="nav-item"><a class="nav-link" href="#filters">Filters</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#plot">Plot</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#project">Project</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+	
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container">
+                <div class="masthead-subheading">Crypto Crustaceans Project 2</div>
+                <div class="masthead-heading text-uppercase">Financial Sentiment Analysis Dashboard</div>
+            </div>
+        </header>
+	
+        <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">About</h2>
+                    <h3 class="section-subheading text-muted">For this project, our goal was to analyze the effect of financial news on the market and display the results in easy to interpret visualizations. We are incorporating market data from Yahoo Finance and an archive of over 4 million financial news articles covering 6,000 stocks from 2009-2020. A sentiment analysis was performed using finBERT, a pre-trained NLP model, to identify positive, neutral, and negative news headlines.
+
+                        The sentiment analysis was plotted alongside market movement data to create a color-coded calendar.
+                    </h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-terminal fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">FinBERT Sentiment Analysis</h4>
+                        <p class="text-muted">FinBERT is an NLP model trained to perform sentiment analysis on financial text. It is based on the BERT language model and trained specifically for the finance domain. We used this model to analyze over 1 million news articles.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-chart-line fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Yahoo Finance</h4>
+                        <p class="text-muted">We extracted market data from Yahoo Finance. Using yFinance, we pulled the daily performance of the S&P 500 going back to the start of the century.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-eye fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">JavaScript Visualizations</h4>
+                        <p class="text-muted">We leveraged two JS libraries to build our visualizations. D3.js combines powerful visualization components and a data-driven approach to DOM manipulation to create custom, dynamic, and interactive data visualizations. Chart.js is used to simple, clean, and engaging HTML5 based JavaScript charts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+	
+	<!-- Filters-->	
+        <section class="page-section bg-light" id="filters">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Filter by Year</h2>
+                    <h3 class="section-subheading text-muted">Apply filters to the below visualizations.</h3>
+                    <div id="plotFilters"></div>
+                </div>
+            </div>
+        </section>
+	
+        <!-- Calendar Grid-->
+        <section class="page-section bg-light" id="calendar">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Financial Calendar</h2>
+                    <h3 class="section-subheading text-muted">This calendar shows financial news sentiment (upper right-hand corners) and market movements (lower left-hand corners). Green blocks represent positive news headlines (on average) and positive price movements per day. Pink blocks represent negative news headlines (on average) and negative price movements per day.<br>The calendar was created using D3.js</h3>
+                </div>
+                    <div id="d3calendar" style=" display: flex; justify-content: center; align-items: center;"></div>
+            </div>
+            
+        </section>
+	
+        <!-- Plot-->
+        <section class="page-section bg-light" id="plot">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Plot</h2>
+                    <h3 class="section-subheading text-muted">Plotting price of GSPC over time.<br>The plot was created using chart.js</h3>
+                </div>
+                <div id="chartjsline"></div>
+            </div>
+        </section>
+        <section class="page-section bg-light">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase"></h2>
+                    <h3 class="section-subheading text-muted">Plotting our news sentiment analysis vs. price of GSPC.<br>The plot was created using chart.js</h3>
+                </div>
+                <div id="chartjsscatter"></div>
+            </div>
+        </section>
+		
+        <!-- Project-->
+        <section class="page-section" id="project">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Project Timeline</h2>
+                    <h3 class="section-subheading text-muted">Our team built on the skills learned during the ETL project and asked ourselves "If we had more time then, what else would we work on?" It didn't take long for all of us to agree that the wealth of information we scraped and analyzed could have been presented in a much more exciting way. With all we've learned in and out of class since ETL, we've decided to explore different ways to analyze and display our data. Here's how we did it.</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/1.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Extract:</h4>
+                                <h4 class="subheading">Yahoo Finance Data and FinBERT Sentiment Analysis</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">We utilized the yFinance Python library to pull GSPC ticker data, representing the S&P 500 Index. We decided to use this ticker symbol as a proxy for the U.S. stock market. The Python library allowed us to interact with Yahoo Finance's interface and pull specific data for a large time frame. Data from yFinance included the date, open, high, low, close, and volume traded per day.
+                                <br>
+                                <br>We also downloaded a Kaggle dataset of ~4 million finance news articles, and we used finBERT, a pre-trained NLP model, to analyze the texts of each headline. The finBERT analysis told us whether news headlines were positive, negative, or neutral. FinBERT scores text on a scale of -1 (very negative) to 1 (very positive). Texts with a score of 0 are netural.
+                            
+                            </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/2.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Transform:</h4>
+                                <h4 class="subheading">Data Clean Up & Analysis</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">We created a PostgreSQL schema using a database diagram tool, defining our database with three tables: Yahoo Finance market data, news headline data, and the results of the finBERT sentiment analysis. The individual data sets were cleaned up prior to loading into PostgreSQL.
+                            <br>
+                            <br>With the data loaded into our PostgreSQL database, we could perform necessary aggregations (e.g., averaging news sentiment scores by day) and join the data for our analysis.</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/3.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Load:</h4>
+                                <h4 class="subheading">Putting Everything Together with SQLAlchemy and Flask</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">We created a Flask application to serve up data and power our JavaScript visualizations. The Flask app queries data from our PostgreSQL database and converts it into JSON format. The JSON can be accessed at the '/data' route by our JavaScript code. The '/home' route accesses our HTML page visualizations. 
+                                
+                            </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="static/assets/img/about/4.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Visualization:</h4>
+                                <h4 class="subheading">Plotting with JavaScript and Sending the Project Live</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Our first visualization is a financial calendar that shows market movements and news sentiment using a color scale from green to pink. The two data sets are shown as connecting triangles. The two triangles connect to form a square, each representing a day. Green indicates positive market movement and positive news, and pink indicates the opposite. We see this as a "financial journal" that represents both actual data and news sentiment of the day. As you can see, some days the news and the market coincides, and some days they do not! This visualization was created using D3.js.
+                                <br>
+                                <br>Our two other visualizations were created using Chart.js. One shows daily market movement over time as a line plot. The other shows the correlation between market movement and news sentiment as a scatter plot.<br><br>
+
+                                By default, all three visualizations show data for the 2010-2020 period. All three visualizations can also be filtered for a specific year. The filter was created using D3.js.
+                                
+                            </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+                                Explore
+                                <br />
+                                Our
+                                <br />
+                                Plots!
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+		
+        
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./static/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+		<script src="https://d3js.org/d3-array.v2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+		<script type="text/javascript" src="./static/plots.js"></script>
+    </body>
+</html>
