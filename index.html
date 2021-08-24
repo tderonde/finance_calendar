@@ -135,9 +135,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Project Timeline</h2>
-                    <h3 class="section-subheading text-muted">Our team built on the skills learned during the ETL project and asked ourselves "If we had more time then, what else would we work on?"
-			    It didn't take long for all of us to agree that the wealth of information we scraped and analyzed could have been presented in a much more exciting way. 
-			    With all we've learned in and out of class since ETL, we've decided to explore different ways to analyze and display our data. Here's how we did it.</h3>
+                    <h3 class="section-subheading text-muted"></h3>
                 </div>
                 <ul class="timeline">
                     <li>
@@ -147,9 +145,15 @@
                                 <h4>Extract:</h4>
                                 <h4 class="subheading">Yahoo Finance Data and FinBERT Sentiment Analysis</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">We utilized the yFinance Python library to pull GSPC ticker data, representing the S&P 500 Index. We decided to use this ticker symbol as a proxy for the U.S. stock market. The Python library allowed us to interact with Yahoo Finance's interface and pull specific data for a large time frame. Data from yFinance included the date, open, high, low, close, and volume traded per day.
+                            <div class="timeline-body"><p class="text-muted">GSPC ticker data, representing the S&P 500 Index, was pulled using yFinance Python library. 
+				    This ticker symbol was used as a proxy for the U.S. stock market. 
+				    Data from yFinance included the date, open, high, low, close, and volume traded per day.
                                 <br>
-                                <br>We also downloaded a Kaggle dataset of ~4 million finance news articles, and we used finBERT, a pre-trained NLP model, to analyze the texts of each headline. The finBERT analysis told us whether news headlines were positive, negative, or neutral. FinBERT scores text on a scale of -1 (very negative) to 1 (very positive). Texts with a score of 0 are netural.
+                                <br>A dataset of ~4 million finance news articles was available on Kaggle. 
+				    Using finBERT, a pre-trained NLP model, the texts of each headline were analyzed. 
+				    The finBERT analysis inicated whether news headlines were positive, negative, or neutral. 
+				    FinBERT scores text on a scale of -1 (very negative) to 1 (very positive). 
+				    Texts with a score of 0 are netural.
                             
                             </p></div>
                         </div>
@@ -161,9 +165,11 @@
                                 <h4>Transform:</h4>
                                 <h4 class="subheading">Data Clean Up & Analysis</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">We created a PostgreSQL schema using a database diagram tool, defining our database with three tables: Yahoo Finance market data, news headline data, and the results of the finBERT sentiment analysis. The individual data sets were cleaned up prior to loading into PostgreSQL.
+                            <div class="timeline-body"><p class="text-muted">A PostgreSQL schema and database were set up to store the market and sentiment data. 
+				    The individual data sets were cleaned up prior to loading into PostgreSQL.
                             <br>
-                            <br>With the data loaded into our PostgreSQL database, we could perform necessary aggregations (e.g., averaging news sentiment scores by day) and join the data for our analysis.</p></div>
+                            <br>With the data loaded into PostgreSQL, necessary aggregations could be performed 
+				    (e.g., averaging news sentiment scores by day), and the data could be joined for the visualizations.</p></div>
                         </div>
                     </li>
                     <li>
@@ -173,7 +179,10 @@
                                 <h4>Load:</h4>
                                 <h4 class="subheading">Putting Everything Together with SQLAlchemy and Flask</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">We created a Flask application to serve up data and power our JavaScript visualizations. The Flask app queries data from our PostgreSQL database and converts it into JSON format. The JSON can be accessed at the '/data' route by our JavaScript code. The '/home' route accesses our HTML page visualizations. 
+                            <div class="timeline-body"><p class="text-muted">A Python Flask application was used to serve up data and power the JavaScript visualizations. 
+				    The Flask app uses SQLAlchemy to query data from the PostgreSQL database and coverts the data into JSON format. 
+				    The JSON can be accessed at the '/data' route by the JavaScript code. 
+				    The '/home' route accesses the main HTML page visualizations. 
                                 
                             </p></div>
                         </div>
@@ -183,13 +192,19 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                 <h4>Visualization:</h4>
-                                <h4 class="subheading">Plotting with JavaScript and Sending the Project Live</h4>
+                                <h4 class="subheading">Plotting with JavaScript</h4>
                             </div>
-                            <div class="timeline-body"><p class="text-muted">Our first visualization is a financial calendar that shows market movements and news sentiment using a color scale from green to pink. The two data sets are shown as connecting triangles. The two triangles connect to form a square, each representing a day. Green indicates positive market movement and positive news, and pink indicates the opposite. We see this as a "financial journal" that represents both actual data and news sentiment of the day. As you can see, some days the news and the market coincides, and some days they do not! This visualization was created using D3.js.
+                            <div class="timeline-body"><p class="text-muted">The main visualization is a financial calendar that shows market movements and news sentiment using a color scale from green to pink. 
+				    The two data sets are shown as connecting triangles, which together form a square.
+				    Each square represents a day. 
+				    Green indicates positive market movement and positive news, and pink indicates the opposite. 
+				    This visualization was created using D3.js.
                                 <br>
-                                <br>Our two other visualizations were created using Chart.js. One shows daily market movement over time as a line plot. The other shows the correlation between market movement and news sentiment as a scatter plot.<br><br>
-
-                                By default, all three visualizations show data for the 2010-2020 period. All three visualizations can also be filtered for a specific year. The filter was created using D3.js.
+                                <br>The other two visualizations were created using Chart.js. One shows daily market movement over time on a line plot. 
+				    The other shows the correlation between market movement and news sentiment as a scatter plot. 
+				    By default, all three visualizations show data for the 2010-2020 period. 
+				    All three visualizations can also be filtered for a specific year. 
+				    The filter was created using D3.js.
                                 
                             </p></div>
                         </div>
